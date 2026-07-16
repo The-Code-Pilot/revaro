@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Revora — Marketing Site
 
-## Getting Started
+The Stripe-native retention platform. Landing page built with Next.js App
+Router, TypeScript, Tailwind CSS v4, and shadcn/ui conventions.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  layout.tsx        Root layout, Geist font, metadata
+  page.tsx           Composes all sections
+  globals.css        Design tokens (Tailwind v4 @theme) + base styles
+components/
+  layout/            navbar.tsx, footer.tsx
+  marketing/         one component per landing-page section
+  common/            container, section-heading, logo, reveal (scroll-in motion)
+  ui/                shadcn-style primitives: button, badge, card, accordion
+```
 
-## Learn More
+## Design tokens
 
-To learn more about Next.js, take a look at the following resources:
+All colors, radii, and fonts live in `app/globals.css` under `@theme`.
+Change `--color-accent` there to re-theme the whole site from one place.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Adding more shadcn/ui components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is pre-configured with `components.json`, so you can pull in
+additional primitives with the shadcn CLI:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx shadcn@latest add dialog
+```
