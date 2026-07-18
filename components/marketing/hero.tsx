@@ -18,7 +18,7 @@ export function Hero() {
       <Container className="relative flex flex-col items-center text-center">
         <Badge variant="accent">
           <Sparkles className="size-3.5" />
-          Now live for Stripe Billing
+          Introducing Revora — early access
         </Badge>
 
         <h1 className="mt-6 max-w-3xl text-balance text-5xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-6xl md:text-7xl">
@@ -33,11 +33,15 @@ export function Hero() {
           with an offer worth staying for. Recovered automatically, natively
           on Stripe.
         </p>
+        <p className="mt-3 max-w-md text-balance text-sm text-muted-foreground">
+          Early access means your feedback shapes the roadmap, and your
+          pricing stays locked in as the product grows.
+        </p>
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <Button size="lg" asChild>
             <a href="#pricing">
-              Start free
+              Start free trial
               <ArrowRight className="size-4" />
             </a>
           </Button>
@@ -47,8 +51,7 @@ export function Hero() {
         </div>
 
         <p className="mt-8 text-sm text-muted-foreground">
-          No credit card required &middot; 5-minute Stripe setup &middot;
-          Cancel anytime
+          No credit card required &middot; Cancel anytime
         </p>
       </Container>
     </section>
