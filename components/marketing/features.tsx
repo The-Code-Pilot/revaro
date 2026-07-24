@@ -2,9 +2,9 @@ import {
   BarChart3,
   ClipboardList,
   Gift,
-  Rocket,
   Workflow,
   Zap,
+  ArrowRightLeft,
 } from "lucide-react";
 
 import { Container } from "@/components/common/container";
@@ -14,39 +14,39 @@ import { SectionHeading } from "@/components/common/section-heading";
 const features = [
   {
     icon: Workflow,
-    title: "Custom cancellation flows",
+    title: "Personalized Rescue Journeys",
     description:
-      "Match the save to the customer — a discount for the price-sensitive, a pause for the seasonal. Higher acceptance than one generic offer for everyone.",
+      "Show a different experience for every cancellation reason. Discounts, pauses, feature waitlists, competitor responses, or custom journeys—tailored to why the customer wants to leave.",
   },
   {
     icon: Gift,
-    title: "Retention offers",
+    title: "Retention Offers That Fit",
     description:
-      "Surface the exact offer that keeps someone — a discount, a pause, a downgrade — the moment they try to leave, not a week later in an email they won't open.",
+      "Present the right offer at the right moment. Encourage customers to stay with discounts, plan changes, pauses, or other personalized retention experiences.",
+  },
+  {
+    icon: ArrowRightLeft,
+    title: "Native Stripe Integration",
+    description:
+      "Connect directly with Stripe so subscriptions and billing stay where they already belong. No duplicate subscription management or billing migration.",
   },
   {
     icon: ClipboardList,
-    title: "Exit surveys",
+    title: "Understand Why Customers Leave",
     description:
-      "When someone does leave, know exactly why — so the next hundred cancellations don't repeat the same fixable mistake.",
-  },
-  {
-    icon: Zap,
-    title: "Stripe-native integration",
-    description:
-      "Live in your Stripe data in minutes. No migration, no duplicate billing logic, nothing to reconcile later.",
+      "Collect structured cancellation feedback and discover the patterns behind churn so your team can improve the product with confidence.",
   },
   {
     icon: BarChart3,
-    title: "Analytics",
+    title: "Measure Revenue You Saved",
     description:
-      "Recovered revenue, save rate, and churn reasons in one place — the numbers your board actually asks about.",
+      "Track recovered revenue, save rates, cancellation reasons, and journey performance in one dashboard designed for subscription businesses.",
   },
   {
-    icon: Rocket,
-    title: "Fast setup",
+    icon: Zap,
+    title: "Flexible Flow Builder",
     description:
-      "Ship your first retention flow this afternoon, not next quarter's roadmap item.",
+      "Create multiple retention journeys without rebuilding your cancellation experience. Adapt your flows as your product and customers evolve.",
   },
 ];
 
@@ -55,28 +55,39 @@ export function Features() {
     <section id="features" className="py-24 md:py-32">
       <Container>
         <SectionHeading
-          eyebrow="Features"
-          title="Everything that turns a cancellation into a save"
-          description="Not another dashboard to check. A system that acts in the moment, automatically."
+          eyebrow="Capabilities"
+          title="The retention platform built for subscription businesses."
+          description="Revora combines personalized rescue journeys, retention offers, customer insights, and revenue analytics into one Stripe-native platform."
         />
 
         <div className="mt-16 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f, i) => (
-            <Reveal key={f.title} delay={i * 60}>
-              <div className="h-full bg-background p-8 transition-colors hover:bg-surface">
-                <div className="mb-5 flex size-10 items-center justify-center rounded-lg border border-border bg-surface text-accent">
-                  <f.icon className="size-4" />
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+
+            return (
+              <Reveal key={feature.title} delay={index * 60}>
+                <div className="group flex h-full flex-col bg-background p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-surface hover:shadow-lg">
+                  <div className="mb-6 flex size-11 items-center justify-center rounded-lg border border-border bg-surface text-accent transition-all duration-300 group-hover:border-accent/30 group-hover:bg-accent/5">
+                    <Icon className="size-5" />
+                  </div>
+
+                  <h3 className="text-base font-semibold text-foreground">
+                    {feature.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {feature.description}
+                  </p>
                 </div>
-                <h3 className="text-base font-medium text-foreground">
-                  {f.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {f.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
+
+        <p className="mt-10 text-center text-sm text-muted-foreground">
+          From your first retention journey to enterprise-scale customer
+          recovery, Revora grows alongside your subscription business.
+        </p>
       </Container>
     </section>
   );

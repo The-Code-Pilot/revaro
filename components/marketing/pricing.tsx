@@ -7,18 +7,30 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const plans = [
+interface Plan {
+  name: string;
+  price: number;
+  description: string;
+  cta: string;
+  features: string[];
+  highlighted?: boolean;
+  roi?: string;
+  includesNote?: string;
+}
+
+const plans: Plan[] = [
   {
     name: "Starter",
     price: 49,
-    description: "For early-stage SaaS just getting started with retention.",
-    roi: "Pays for itself with a single saved customer.",
-    cta: "Get started",
+    description:
+      "For early-stage SaaS looking to recover more customers with minimal setup.",
+    cta: "Start free trial",
     features: [
-      "Up to 200 cancellation sessions/mo",
-      "1 cancellation flow",
+      "Up to 200 cancellation sessions/month",
+      "Up to 2 personalized retention journeys",
       "Exit surveys",
-      "Basic analytics",
+      "Discount, pause & feedback offers",
+      "Retention analytics",
       "Email support",
     ],
   },
@@ -26,31 +38,43 @@ const plans = [
     name: "Growth",
     price: 299,
     description:
-      "For scaling subscription businesses recovering real revenue.",
-    roi: "Pays for itself with your first save — every one after that is margin.",
+      "For SaaS teams turning customer retention into a growth strategy.",
+    includesNote: "Everything in Starter, plus:",
+    roi: "Pays for itself with your first recovered customer.",
     highlighted: true,
     cta: "Start free trial",
     features: [
-      "Unlimited cancellation sessions",
-      "Unlimited flows",
-      "Retention offers engine",
-      "Advanced analytics & reporting",
-      "A/B testing on offers",
+      "Up to 2,500 cancellation sessions/month",
+      "Up to 5 personalized retention journeys",
+      "Conditional journey builder",
+      "Competitor-specific journeys",
+      "Feature waitlist journeys",
+      "Advanced retention analytics",
+      "Recovered MRR reporting",
+      "A/B testing",
+      "Up to 5 team members",
       "Priority support",
     ],
   },
   {
     name: "Enterprise",
     price: 999,
-    description: "For large-scale and multi-brand subscription businesses.",
-    roi: "Built for teams where one lost account costs more than the plan.",
+    description:
+      "For subscription businesses operating at scale.",
+    includesNote: "Everything in Growth, plus:",
     cta: "Talk to sales",
     features: [
-      "Everything in Growth",
-      "Multiple Stripe accounts",
-      "Custom integrations & API access",
-      "Dedicated onboarding & CSM",
-      "Custom contract & SLA",
+      "Unlimited cancellation sessions",
+      "Unlimited personalized retention journeys",
+      "Unlimited team members & roles",
+      "Multiple workspaces",
+      "Role-based permissions",
+      "API & Webhooks",
+      "CRM integrations",
+      "White-label branding",
+      "White-glove onboarding",
+      "Priority SLA support",
+      "Dedicated Customer Success Manager",
     ],
   },
 ];
@@ -62,7 +86,7 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Pricing"
           title="Priced to be an obvious yes"
-          description="Every plan recovers revenue from day one — the only real question is how much you're already losing by waiting."
+          description="Every plan helps recover revenue that would otherwise be lost—the only real question is how much churn is already costing you."
         />
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
@@ -78,12 +102,14 @@ export function Pricing() {
               >
                 {plan.highlighted && (
                   <Badge variant="accent" className="absolute -top-3 left-8">
-                    Recommended
+                    Best Value
                   </Badge>
                 )}
+
                 <h3 className="text-lg font-medium text-foreground">
                   {plan.name}
                 </h3>
+
                 <p className="mt-1.5 text-sm text-muted-foreground">
                   {plan.description}
                 </p>
@@ -94,24 +120,42 @@ export function Pricing() {
                   </span>
                   <span className="text-sm text-muted-foreground">/mo</span>
                 </div>
-                <p className="mt-2 text-xs text-accent">{plan.roi}</p>
+
+                {plan.roi && (
+                  <p className="mt-2 text-xs font-medium text-accent">
+                    {plan.roi}
+                  </p>
+                )}
 
                 <Button
                   variant={plan.highlighted ? "default" : "outline"}
                   className="mt-6 w-full"
                   asChild
                 >
-                  <a href="#">{plan.cta}</a>
+                  <a href="#">
+                    {plan.cta}
+                  </a>
                 </Button>
 
-                <ul className="mt-8 space-y-3">
-                  {plan.features.map((f) => (
+                {plan.includesNote && (
+                  <p className="mt-8 text-xs font-medium uppercase tracking-wide text-foreground">
+                    {plan.includesNote}
+                  </p>
+                )}
+
+                <ul
+                  className={cn(
+                    "space-y-3",
+                    plan.includesNote ? "mt-3" : "mt-8"
+                  )}
+                >
+                  {plan.features.map((feature) => (
                     <li
-                      key={f}
+                      key={feature}
                       className="flex items-start gap-2.5 text-sm text-foreground/85"
                     >
                       <Check className="mt-0.5 size-4 shrink-0 text-accent" />
-                      {f}
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -121,8 +165,9 @@ export function Pricing() {
         </div>
 
         <p className="mt-10 text-center text-xs text-muted-foreground">
-          Stripe-native — we never store card data &middot; Export your data
-          anytime &middot; Built for 99.9% uptime
+          Built for subscription businesses &middot; Your billing stays under
+          your control &middot; Export your data anytime &middot; No long-term
+          contracts
         </p>
       </Container>
     </section>

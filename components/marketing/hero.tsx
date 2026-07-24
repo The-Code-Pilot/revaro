@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden pt-40 pb-24 md:pt-48 md:pb-32"
+      className="relative overflow-hidden pt-48 pb-32 md:pt-60 md:pb-40"
     >
       <div
         aria-hidden
@@ -29,9 +29,7 @@ export function Hero() {
         </h1>
 
         <p className="mt-6 max-w-xl text-balance text-lg text-muted-foreground md:text-xl">
-          Revora meets your customers in the exact moment they try to leave —
-          with an offer worth staying for. Recovered automatically, natively
-          on Stripe.
+        Revora meets customers at the moment they click "Cancel"—with personalized experiences that give them a better reason to stay.
         </p>
         <p className="mt-3 max-w-md text-balance text-sm text-muted-foreground">
           Early access means your feedback shapes the roadmap, and your
