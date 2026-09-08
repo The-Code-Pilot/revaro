@@ -38,11 +38,12 @@ export default function ProviderSigninBlock() {
       <Button
         variant="outline"
         type="button"
-        className="h-11 gap-2"
+        /* FIXED TRACK: Injected explicit light-mode hover tints, subtle boundary highlights, and touch micro-actions */
+        className="h-11 gap-2 border border-border/80 bg-background text-foreground font-semibold text-xs rounded-xl shadow-none transition-all duration-200 hover:bg-muted hover:border-slate-300 active:scale-[0.98] disabled:opacity-40"
         disabled={pendingProvider !== null}
         onClick={() => signInWithProvider("google")}
       >
-        <FaGoogle className="size-4" />
+        <FaGoogle className="size-4 text-slate-500" />
         <span>
           {pendingProvider === "google" ? "Connecting..." : "Google"}
         </span>
@@ -51,11 +52,12 @@ export default function ProviderSigninBlock() {
       <Button
         variant="outline"
         type="button"
-        className="h-11 gap-2"
+        /* FIXED TRACK: Injected explicit light-mode hover tints, subtle boundary highlights, and touch micro-actions */
+        className="h-11 gap-2 border border-border/80 bg-background text-foreground font-semibold text-xs rounded-xl shadow-none transition-all duration-200 hover:bg-muted hover:border-slate-300 active:scale-[0.98] disabled:opacity-40"
         disabled={pendingProvider !== null}
         onClick={() => signInWithProvider("github")}
       >
-        <FaGithub className="size-4" />
+        <FaGithub className="size-4 text-slate-700" />
         <span>
           {pendingProvider === "github" ? "Connecting..." : "GitHub"}
         </span>

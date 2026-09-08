@@ -44,7 +44,7 @@ export function Hero() {
             </a>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="#product">Watch the moment</a>
+            <a href="/demo">Watch a demo</a>
           </Button>
         </div>
 

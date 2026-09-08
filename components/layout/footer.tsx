@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { Container } from "@/components/common/container";
-import { Logo } from "@/components/common/logo";
+import Lettermark from "@/components/brand/Lettermark";
+import Wordmark from "@/components/brand/Wordmark";
 
 const columns = [
   {
@@ -26,7 +28,10 @@ export function Footer() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div>
-            <Logo />
+            <Link href="/" className="inline-flex items-center gap-2.5">
+              <Lettermark className="h-7 w-7" />
+              <Wordmark textSize="text-xl" />
+            </Link>
             <p className="mt-4 max-w-[220px] text-sm text-muted-foreground">
               The Stripe-native retention platform.
             </p>
@@ -62,9 +67,8 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground sm:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-center gap-4 border-t border-border pt-8 text-xs text-muted-foreground sm:flex-row">
           <span>&copy; 2026 Revora. All rights reserved.</span>
-          <span>Made for the Stripe ecosystem.</span>
         </div>
       </Container>
     </footer>

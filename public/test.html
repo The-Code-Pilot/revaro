@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revora - SDK Test Sandbox Canvas</title>
+  <style>
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .test-container {
+      text-align: center;
+      padding: 40px;
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -3px rgba(15, 23, 42, 0.02);
+    }
+    .cancel-btn {
+      background-color: #0F172A;
+      color: #F8FAFC;
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cancel-btn:hover {
+      background-color: #1e293b;
+      transform: translateY(-1px);
+    }
+  </style>
+  <!-- INTEGRATING YOUR LOCAL PUBLIC SDK BUNDLE FILE -->
+  <script src="/revora-widget.js" data-revora-key="rv_pub_test_123456789" defer></script>
+</head>
+<body>
+
+  <div class="test-container">
+    <h1 style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">Merchant Portal Sandbox</h1>
+    <p style="font-size: 13px; color: #64748b; margin-bottom: 32px;">Simulate an end-user billing subscription offboarding event loop.</p>
+    
+    <button id="cancel-button-trigger" class="cancel-btn">Cancel Subscription</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const triggerButton = document.getElementById('cancel-button-trigger');
+      
+      if (triggerButton) {
+        triggerButton.addEventListener('click', () => {
+          window.Revora.open({
+            public_key: 'rv_pub_test_123456789',
+            external_customer_id: 'cus_stripe_test_999',
+            subscription_id: 'sub_stripe_test_999',
+            email: 'founder@example.com',
+            name: 'Test Founder Workspace',
+            onClose: (result) => {
+              console.log('Revora Interception Loop Finished. Outcome:', result.outcome);
+              
+              if (result.outcome === 'offer_accepted') {
+                // SUCCESS PATH: User accepted a concession. Route them back or update the UI state.
+                window.location.href = '/dashboard?retention=saved';
+              } else {
+                // EXIT PATH: User finalized cancellation. Route them out completely.
+                window.location.href = '/cancelled';
+              }
+            },
+            onError: (err) => {
+              console.error('Revora fail-safe triggered:', err);
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

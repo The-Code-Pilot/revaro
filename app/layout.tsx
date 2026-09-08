@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
 import "./globals.css";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Revora — The Stripe-native Retention Platform",
@@ -24,10 +29,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={plusJakartaSans.variable}
       suppressHydrationWarning
     >
-      <body className="bg-background text-foreground antialiased">
+      <body className="font-sans bg-background text-foreground antialiased">
         {children}
       </body>
     </html>

@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
 
 import { Container } from "@/components/common/container";
-import { Logo } from "@/components/common/logo";
+import Lettermark from "@/components/brand/Lettermark";
+import Wordmark from "@/components/brand/Wordmark";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -36,9 +38,10 @@ export function Navbar() {
       )}
     >
       <Container className="flex h-16 items-center justify-between">
-        <a href="#top" aria-label="Revora home">
-          <Logo />
-        </a>
+        <Link href="#top" aria-label="Revora home" className="flex items-center gap-2.5">
+          <Lettermark className="h-7 w-7" />
+          <Wordmark textSize="text-xl" />
+        </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
           {links.map((l) => (

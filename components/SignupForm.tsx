@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createDashboardClient } from "@/lib/supabase/client";
+import { Eye, EyeOff } from "lucide-react"; // Standard structural vector icons
 
 export default function SignupForm() {
   const router = useRouter();
@@ -16,6 +17,11 @@ export default function SignupForm() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [pending, setPending] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // Visibility switch tracker
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   async function handleSignup(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,7 +63,7 @@ export default function SignupForm() {
     }
 
     if (data.session) {
-      router.push("/dashboard");
+      router.push("/onboarding");
       router.refresh();
       return;
     }
@@ -112,23 +118,40 @@ export default function SignupForm() {
           </span>
         </div>
 
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Create a secure password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          autoComplete="new-password"
-          minLength={8}
-          required
-          disabled={pending}
-          className="h-11"
-        />
+        {/* INLINE ACTION HOUSING WRAPPER CONTAINER */}
+        <div className="relative flex items-center">
+          <Input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"} // Dynamically mutates field mask type
+            placeholder="Create a secure password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            autoComplete="new-password"
+            minLength={8}
+            required
+            disabled={pending}
+            className="h-11 pr-10" // Right padding keeps text clear of icon bounds
+          />
+          {/* TRAP CLICK BUTTON TARGET FOR GRAPHIC TOGGLES */}
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            disabled={pending}
+            className="absolute right-3 text-slate-400 hover:text-slate-600 focus:outline-none transition-colors disabled:opacity-40"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? (
+              <EyeOff className="h-4 w-4" />
+            ) : (
+              <Eye className="h-4 w-4" />
+            )}
+          </button>
+        </div>
       </div>
 
       <Button
-        className="h-11 w-full"
+        className="h-11 w-full mt-4 transition-all duration-200 active:scale-[0.98]"
         type="submit"
         disabled={pending}
       >
